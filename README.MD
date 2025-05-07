@@ -51,6 +51,6 @@ ld hello.o -o hello
 Registers only store values temporarily, so you might want to save it to memory, registers also get overwrites if it is used again. 
 ```bash
 mov rax, 48			;stores binary 48 temporarily
-mov [address], rax			;stores it to a memory address
+mov [address], rax		;stores it to a memory address
 mov rax, 1			;complete overwrites the register rax
 ```
