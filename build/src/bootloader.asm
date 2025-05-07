@@ -1,4 +1,4 @@
-[ORG 0x7C00]
+[org 0x7C00]
 
 start:
     xor ax, ax
@@ -15,16 +15,17 @@ start:
     mov dh, 0
     mov dl, 0x00
     mov bx, 0x0500
+    mov ax, 0x0000
+    mov es, ax
     int 0x13
-    jc disk_error
+    jc _error
+    jmp 0x0000:0x0500
 
-    jmp 0x0500
-
-disk_error:
-mov si, err_msg
-call _print
-jmp $
-
+_error:
+    mov si, error
+    call _print
+    jmp $
+    
 _print:
 .load:
     lodsb
@@ -36,8 +37,8 @@ _print:
 .done:
     ret
 
-welcome db "welcome run successful", 0
-err_msg db 0xA, 0xD, "failed to load", 0
+welcome db "welcome", 0
+error db 0xA, 0xD, "failed to load", 0
 
 times 510 - ($ - $$) db 0
 dw 0xAA55
