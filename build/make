@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd build
+nasm -f bin src/bootloader.asm -o bin/bootloader.bin
+cat bin/bootloader.bin > img/full.img
+qemu-system-x86_64 -drive format=raw,file=img/full.img
+cd ..
