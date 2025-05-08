@@ -1,8 +1,10 @@
 #!/bin/bash
 
-cd build
 nasm -f bin src/bootloader.asm -o bin/bootloader.bin
 nasm -f bin src/testdisk.asm -o bin/testdisk.bin
+
+dd if=/dev/zero of=full.img bs=512 count=2880
 cat bin/bootloader.bin bin/testdisk.bin > img/full.img
+
+
 qemu-system-x86_64 -drive format=raw,file=img/full.img
-cd ..

@@ -1,10 +1,7 @@
 [org 0x0500]
- 
-start:
-    xor ax,ax
-    mov ds,ax
-    mov es,ax
+[bits 16]
 
+start:
     mov si, loaded
     call _print
 
@@ -19,7 +16,7 @@ _print:
 .done:
     ret
 
-loaded db 0xA, 0xD,"sector 2 at adress 0x0500 loaded",0
+loaded: db 0xD, 0xA,"sector 2 at adress 0x0600 loaded",0
 
 
 times 512 - ($ - $$) db 0  ; Fill remaining space to 510 bytes
